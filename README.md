@@ -1,12 +1,12 @@
 # ACEReport
 
-AceReport is a modern, responsive news aggregation web application that delivers timely news across multiple categories with a clean, focused reading experience.
+AceReport is a modern, responsive news aggregation web application delivering the latest Indian headlines and stories across multiple categories with a clean, focused reading experience.
 
 ---
 
 ## Features
 
-- **Category Navigation**: Browse news across 7 categories (General, Science, Business, Health, Sports, Technology, Entertainment)
+- **Category Navigation**: Browse news across 7 categories (Politics, Science, Business, Health, Sports, Technology, Entertainment)
 - **Featured Stories**: Prominent hero card showcasing top news
 - **Smart Search**: Debounced search input to optimize performance and reduce API calls
 - **Infinite Scroll**: Seamless pagination for loading additional articles
@@ -22,7 +22,7 @@ AceReport is a modern, responsive news aggregation web application that delivers
 - **Routing**: React Router
 - **Library/Framework**: React Infinite Scroll
 - **Styling**: Tailwind CSS + Custom CSS
-- **API**: https://newsapi.org/ integration
+- **API**: [NewsData.io](https://newsdata.io/)
 
 ---
 
@@ -31,4 +31,4 @@ AceReport is a modern, responsive news aggregation web application that delivers
 © 2025 ACEReport. All rights reserved
 
 
-**Made with ❤️ by [Kiran Raj](https://github.com/yourusername)**
+**Made with ❤️ by [Kiran Raj](https://github.com/k1ranraj)**

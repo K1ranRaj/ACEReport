@@ -50,7 +50,7 @@ function Navbar() {
           </div>
 
           <div className="hidden lg:flex items-center gap-6">
-            <Link className={`text-sm font-semibold ${isActive('/') && `underline underline-offset-8 ${theme === 'dark' ? 'decoration-white' : 'decoration-blue-950' }  decoration-1 `}`} to='/'>General</Link>
+            <Link className={`text-sm font-semibold ${isActive('/') && `underline underline-offset-8 ${theme === 'dark' ? 'decoration-white' : 'decoration-blue-950' }  decoration-1 `}`} to='/'>Politics</Link>
 
             <Link className={`text-sm font-semibold ${isActive('/Science') && `underline underline-offset-8 ${theme === 'dark' ? 'decoration-white' : 'decoration-blue-950' }  decoration-1 `}`} to='/Science'>Science</Link>
 
@@ -138,7 +138,7 @@ function Navbar() {
               </button>
             )}
           </form>
-          <Link className={`text-base font-medium no-underline transition-colors ${isActive('/') ? 'text-ace-cyan' : 'text-white'}`} to='/' onClick={() => setOpen(false)}>General</Link>
+          <Link className={`text-base font-medium no-underline transition-colors ${isActive('/') ? 'text-ace-cyan' : 'text-white'}`} to='/' onClick={() => setOpen(false)}>Politics</Link>
           <Link className={`text-base font-medium no-underline transition-colors ${isActive('/Science') ? 'text-ace-cyan' : 'text-white'}`} to='/Science' onClick={() => setOpen(false)}>Science</Link>
           <Link className={`text-base font-medium no-underline transition-colors ${isActive('/Sports') ? 'text-ace-cyan' : 'text-white'}`} to='/Sports' onClick={() => setOpen(false)}>Sports</Link>
           <Link className={`text-base font-medium no-underline transition-colors ${isActive('/Technology') ? 'text-ace-cyan' : 'text-white'}`} to='/Technology' onClick={() => setOpen(false)}>Technology</Link>

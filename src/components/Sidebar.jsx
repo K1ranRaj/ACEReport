@@ -13,8 +13,8 @@ function Sidebar({ topStories = [] }){
         <div className="space-y-3 mt-3 sidebar-list">
           {topStories.length > 0 ? (
             topStories.map((s, i) => (
-              <a key={i} href={s.url} target="_blank" rel="noreferrer" className="group flex items-start gap-4 no-underline transition-all duration-300 p-0 py-3 rounded-lg hover:bg-white/5 cursor-pointer">
-                <img src={s.urlToImage || '/placeholder.svg'} alt={s.title} className="w-16 h-12 object-cover rounded-md group-hover:scale-105 transition-transform duration-400" />
+              <a key={i} href={s.link} target="_blank" rel="noreferrer" className="group flex items-start gap-4 no-underline transition-all duration-300 p-0 py-3 rounded-lg hover:bg-white/5 cursor-pointer">
+                <img src={s.image_url || '/placeholder.svg'} alt={s.title} className="w-16 h-12 object-cover rounded-md group-hover:scale-105 transition-transform duration-400" />
                 <div className="flex-1 overflow-hidden">
                   <div className="text-sm font-semibold text-white group-hover:text-white transition-colors duration-300">{s.title.length > 70 ? s.title.slice(0,70) + '...' : s.title}</div>
                   <div className="text-xs text-white/60 mt-1">{s.source ? s.source.name : 'News'}</div>
@@ -33,7 +33,7 @@ function Sidebar({ topStories = [] }){
           Categories
         </h4>
         <div className="grid grid-cols-2 gap-4">
-          {['General', 'Science', 'Sports', 'Technology', 'Entertainment', 'Health', 'Business'].map((cat) => (
+          {['Politics', 'Science', 'Sports', 'Technology', 'Entertainment', 'Health', 'Business'].map((cat) => (
             <a
               key={cat}
               href={`/${cat}`}

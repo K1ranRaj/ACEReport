@@ -6,30 +6,25 @@ import Sidebar from './Sidebar';
 import Footer from './Footer';
 import { useSearch } from '../context/SearchContext';
 
-
 function NewsPage(props) {
   
   const { searchQuery } = useSearch();
   const [articles, setArticles] = useState([]);
-  const [totalResults, setTotalResults] = useState(0);
-  const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-
-  const today = new Date().toISOString().split('T')[0];
-  const yesterday = new Date(new Date().setDate(new Date().getDate() - 1)).toISOString().split('T')[0];
+  const [nextPage, setNextPage] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const FetchNews = async () => {
+    setLoading(true);
     try {
-      const url = `https://newsapi.org/v2/everything?q=${props.category}&from=${yesterday}&to=${today}&pageSize=10&page=${page}&language=en&sortBy=popularity&searchIn=title,description&apiKey=${props.newsapikey}`;
-      let data = await fetch(url);
-      let jsondata = await data.json();
-      if (jsondata.articles) {
-        const filteredArticles = jsondata.articles.filter(article => article.title && article.description && article.urlToImage);
+      const url = `https://newsdata.io/api/1/latest?apikey=${props.newsapikey}&language=en&category=${props.category.toLowerCase()}&image=1&removeduplicate=1&country=in`;
+      let res = await fetch(url);
+      let data = await res.json();
+      if (data.results) {
+        const filteredArticles = data.results.filter(article => article.title && article.description && article.image_url);
         setArticles(filteredArticles);
-        setTotalResults(jsondata.totalResults || 0);
-        if (filteredArticles.length < 10 || filteredArticles.length >= jsondata.totalResults) {
-          setHasMore(false);
-        }
+        setNextPage(data.nextPage || null);
+        setHasMore(!!data.nextPage);
       } else {
         console.error("No articles found");
         setHasMore(false);
@@ -37,30 +32,27 @@ function NewsPage(props) {
     } catch (error) {
       console.error("Error fetching news:", error);
       setHasMore(false);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    setArticles([]);
-    setPage(1);
-    setHasMore(true);
     FetchNews();
     // eslint-disable-next-line
   }, [props.category]);
 
   const fetchMoreNews = async () => {
-    const nextPage = page + 1;
-    setPage(nextPage);
+    if (!nextPage) return;
     try {
-      const url = `https://newsapi.org/v2/everything?q=${props.category}&from=${yesterday}&to=${today}&pageSize=10&page=${nextPage}&language=en&sortBy=popularity&searchIn=title,description&apiKey=${props.newsapikey}`;
-      let data = await fetch(url);
-      let jsondata = await data.json();
-      if (jsondata.articles) {
-        const filteredArticles = jsondata.articles.filter(article => article.title && article.description && article.urlToImage);
-        setArticles(articles.concat(filteredArticles));
-        if (filteredArticles.length < 10 || articles.length + filteredArticles.length >= totalResults) {
-          setHasMore(false);
-        }
+      const url = `https://newsdata.io/api/1/latest?apikey=${props.newsapikey}&language=en&category=${props.category.toLowerCase()}&page=${nextPage}&image=1&removeduplicate=1&country=in`;
+      let res = await fetch(url);
+      let data = await res.json();
+      if (data.results) {
+        const filteredArticles = data.results.filter(article => article.title && article.description && article.image_url);
+        setArticles(prevArticles => prevArticles.concat(filteredArticles));
+        setNextPage(data.nextPage || null);
+        setHasMore(!!data.nextPage);
       } else {
         console.error("No articles found");
         setHasMore(false);
@@ -81,7 +73,15 @@ function NewsPage(props) {
 
   const featured = filteredArticles && filteredArticles.length ? filteredArticles[0] : null;
   const rest = filteredArticles && filteredArticles.length > 1 ? filteredArticles.slice(1) : [];
-  const topStories = searchQuery ? articles.slice(0, 6) : articles.slice(0, 6);
+  const topStories = filteredArticles.slice(0, 6);
+
+  if (loading) {
+    return (
+      <main className="app-container container-content mx-auto py-8 flex justify-center items-center min-h-screen">
+        <LoadingSpinner />
+      </main>
+    );
+  }
 
   return (
     <main className="app-container container-content mx-auto py-8 fade-in">
@@ -95,13 +95,13 @@ function NewsPage(props) {
         <section className="md:col-span-3 space-y-6">
           {featured && (
             <article className="featured-card group bg-linear-to-br from-white/2 to-white/1 border border-white/5 rounded-xl overflow-hidden md:flex">
-              <img src={featured.urlToImage || '/placeholder.svg'} alt={featured.title} className="featured-image md:w-1/2 group-hover:!scale-[101%] !transition-transform !duration-700 !ease-out" />
+              <img src={featured.image_url || '/placeholder.svg'} alt={featured.title} className="featured-image md:w-1/2 group-hover:!scale-[101%] !transition-transform !duration-700 !ease-out" />
               <div className="featured-content md:w-1/2">
-                <h2 className="text-2xl md:text-3xl font-bold mb-3">{featured.title}</h2>
-                <p className="text-white/75 mb-4">{featured.description}</p>
+                <h2 className="text-2xl md:text-3xl font-bold mb-3">{featured.title ? (featured.title.length > 120 ? featured.title.slice(0, 120) + '...' : featured.title) : 'Untitled'}</h2>
+                <p className="text-white/75 mb-4">{featured.description ? (featured.description.length > 340 ? featured.description.slice(0, 340) + '...' : featured.description) : ''}</p>
                 <div className="flex items-center gap-5">
-                  <button onClick={() => window.open(featured.url, '_blank')} className="py-2 rounded-md text-white font-semibold">Read full</button>
-                  <div className="text-sm text-white/60">{featured.source ? featured.source.name : ''}</div>
+                  <button onClick={() => window.open(featured.link, '_blank')} className="py-2 rounded-md text-white font-semibold cursor-pointer">Read full</button>
+                  <div className="text-sm text-white/60">{featured.source_name || ''}</div>
                 </div>
               </div>
             </article>
@@ -130,10 +130,10 @@ function NewsPage(props) {
                     <News
                       title={e.title ? (e.title.length > 120 ? e.title.slice(0, 120) + '...' : e.title) : 'Untitled'}
                       desc={e.description ? (e.description.length > 140 ? e.description.slice(0, 140) + '...' : e.description) : ''}
-                      imgUrl={e.urlToImage}
-                      readm={e.url}
-                      publishedAt={e.publishedAt}
-                      source={e.source}
+                      imgUrl={e.image_url}
+                      readm={e.link}
+                      publishedAt={e.pubDate}
+                      source={e.source_name}
                     />
                   </div>
                 )}
@@ -142,7 +142,7 @@ function NewsPage(props) {
           )}
         </section>
 
-        <aside >
+        <aside>
           <Sidebar topStories={topStories} />
         </aside>
       </div>

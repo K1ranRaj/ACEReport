@@ -9,7 +9,8 @@ function App() {
     <div className="app-container">
       <Navbar />
       <Routes>
-        <Route path="/" element={<NewsPage limit={30} category="General" newsapikey={apiKey} />} />
+        <Route path="/" element={<NewsPage limit={30} category="Politics" newsapikey={apiKey} />} />
+        <Route path="/Politics" element={<NewsPage limit={30} category="Politics" newsapikey={apiKey} />} />
         <Route path="/Science" element={<NewsPage limit={30} category="Science" newsapikey={apiKey} />} />
         <Route path="/Sports" element={<NewsPage limit={30} category="Sports" newsapikey={apiKey} />} />
         <Route path="/Entertainment" element={<NewsPage limit={30} category="Entertainment" newsapikey={apiKey} />} />
