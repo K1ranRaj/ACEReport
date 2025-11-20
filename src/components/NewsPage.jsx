@@ -95,7 +95,7 @@ function NewsPage(props) {
         <section className="md:col-span-3 space-y-6">
           {featured && (
             <article className="featured-card group bg-linear-to-br from-white/2 to-white/1 border border-white/5 rounded-xl overflow-hidden md:flex">
-              <img src={featured.image_url || '/placeholder.svg'} alt={featured.title} className="featured-image md:w-1/2 group-hover:!scale-[101%] !transition-transform !duration-700 !ease-out" />
+              <img src={featured.image_url || '/placeholder.svg'} alt={featured.title} loading="lazy" className="featured-image md:w-1/2 group-hover:!scale-[101%] !transition-transform !duration-700 !ease-out" />
               <div className="featured-content md:w-1/2">
                 <h2 className="text-2xl md:text-3xl font-bold mb-3">{featured.title ? (featured.title.length > 120 ? featured.title.slice(0, 120) + '...' : featured.title) : 'Untitled'}</h2>
                 <p className="text-white/75 mb-4">{featured.description ? (featured.description.length > 340 ? featured.description.slice(0, 340) + '...' : featured.description) : ''}</p>

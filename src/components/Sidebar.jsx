@@ -3,7 +3,7 @@ import { useTheme} from '../context/ThemeContext';
 
 function Sidebar({ topStories = [] }){
 
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <aside className="w-full">
@@ -19,7 +19,7 @@ function Sidebar({ topStories = [] }){
           {topStories.length > 0 ? (
             topStories.map((s, i) => (
               <a key={i} href={s.link} target="_blank" rel="noreferrer" className="group flex items-start gap-4 no-underline transition-all duration-300 p-0 py-3 rounded-lg hover:bg-white/5 cursor-pointer">
-                <img src={s.image_url || '/placeholder.svg'} alt={s.title} className="w-16 h-12 object-cover rounded-md group-hover:scale-105 transition-transform duration-400" />
+                <img src={s.image_url || '/placeholder.svg'} alt={s.title} className="w-16 h-12 object-cover rounded-md group-hover:scale-105 transition-transform duration-400" loading="lazy" />
                 <div className="flex-1 overflow-hidden">
                   <div className="text-sm font-semibold text-white group-hover:text-white transition-colors duration-300">{s.title.length > 70 ? s.title.slice(0,70) + '...' : s.title}</div>
                   <div className="text-xs text-white/60 mt-1">{s.source ? s.source.name : 'News'}</div>

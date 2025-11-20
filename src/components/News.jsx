@@ -7,7 +7,7 @@ function News(props) {
     <article className="group slide-up h-full flex flex-col bg-linear-to-br from-white/3 to-white/1 border border-white/8 rounded-2xl overflow-hidden hover:border-white/20 shadow-lg hover:shadow-xl !transition-all !duration-700 !ease-out">
 
       <div className="relative h-52 md:h-56 overflow-hidden bg-linear-to-br from-gray-800 to-gray-900">
-        <img src={imgUrl || fallback} alt={title} className="w-full h-full object-cover group-hover:!scale-[103%] !transition-transform !duration-700 !ease-out" />
+        <img src={imgUrl || fallback} alt={title} className="w-full h-full object-cover group-hover:!scale-[103%] !transition-transform !duration-700 !ease-out" loading="lazy" />
         
         <div className="absolute left-3 top-3 px-3 py-1 rounded-full bg-linear-to-r from-ace-violet/80 to-ace-cyan/80 backdrop-blur-md text-xs font-semibold text-white">
           {source && source.name}
