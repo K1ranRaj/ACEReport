@@ -149,27 +149,11 @@ body {
   padding-right: 3rem;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .container-content {
     width: 100%;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-}
-
-@media (max-width: 640px) {
-  .container-content {
-    width: 100%;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .container-content {
-    width: 100%;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
   }
 }
 

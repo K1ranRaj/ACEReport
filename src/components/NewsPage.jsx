@@ -73,7 +73,7 @@ function NewsPage(props) {
 
   const featured = filteredArticles && filteredArticles.length ? filteredArticles[0] : null;
   const rest = filteredArticles && filteredArticles.length > 1 ? filteredArticles.slice(1) : [];
-  const topStories = filteredArticles.slice(0, 6);
+  const topStories = articles.slice(0, 6);
 
   if (loading) {
     return (

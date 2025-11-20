@@ -3,7 +3,7 @@ function Footer(){
   return (
     <footer className="mt-5 xl:mt-16 py-12 pb-0 border-t border-white/15">
       <div>
-        <div className="grid grid-cols-1 grid-rows-1 gap-10 mb-0">
+        <div className="grid grid-cols-1 grid-rows-1 gap-10 mb-4">
 
           <div className="flex flex-col items-center">
             <h3 className="text-lg font-bold text-white mb-3">ACEReport</h3>
@@ -26,7 +26,7 @@ function Footer(){
           </div>
         </div>
 
-        <div className=" pt-4 ">
+        <div className="pt-6 ">
           <div className="flex items-center justify-center">
             <p className="text-sm text-white/70">© 2025 ACEReport. All Rights Reserved</p>
           </div>

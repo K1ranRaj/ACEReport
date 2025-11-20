@@ -118,7 +118,7 @@ function Navbar() {
       </nav>
 
       {open && (
-        <div className="lg:hidden px-4 py-4 flex flex-col gap-3 bg-black/60 glass-card mx-[0.7rem] mt-3 rounded-lg">
+        <div className="lg:hidden px-4 py-4 flex flex-col gap-3 bg-[#0F172A]/95 glass-card mx-[0.7rem] mt-3 rounded-lg">
           <form onSubmit={handleSearch} className="flex items-center bg-white/10 rounded-lg px-3 py-2 gap-2 focus-within:bg-white/20 transition-colors mb-2">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white/50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1010.5 18.5a7.5 7.5 0 006.15-1.85z" />
